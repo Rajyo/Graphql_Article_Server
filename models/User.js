@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
     },
     nationality: {
         type: String,
-        enum: ["Bulgaria", "USA", "UK", "Canada", "Columbia", "Australia"],
+        enum: ["India", "USA", "UK", "Canada", "Columbia", "Australia"],
         required: true,
     },
 
