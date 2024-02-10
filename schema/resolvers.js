@@ -35,7 +35,7 @@ const resolvers = {
 
         articles: async () => {
             try {
-                const articles = await Article.find({})
+                const articles = await Article.find({}).populate('author')
                 return articles
             } catch (error) {
                 Error({ error: 'Server Error', code: '500' })

@@ -23,7 +23,7 @@ const typeDefs = gql`
     
     type Article {
         _id: ID!
-        author: String!
+        author: User!
         title: String!
         description: String!
     }
