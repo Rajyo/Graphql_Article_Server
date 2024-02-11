@@ -17,13 +17,20 @@ const typeDefs = gql`
         email: String!
         username: String!
         password: String!
-        age: Int!
+        name: String!
         nationality: Nationality!
+    }
+    
+    type ArticleAuthor {
+        _id: ID!
+        author: User!
+        title: String!
+        description: String!
     }
     
     type Article {
         _id: ID!
-        author: User!
+        author: String!
         title: String!
         description: String!
     }
@@ -33,7 +40,7 @@ const typeDefs = gql`
         users: [User!]!
         user(id: ID!): User!
 
-        articles: [Article!]!
+        articles: [ArticleAuthor!]!
         article(id: ID!): Article!
     }
 
@@ -43,12 +50,13 @@ const typeDefs = gql`
         email: String!
         username: String!
         password: String!
-        age: Int!
+        name: String!
         nationality: Nationality!
     }
 
-    input updateUsernameInput {
+    input updateUserInput {
         id: ID!
+        newName: String!
         newUsername: String!
         newPassword: String!
     }
@@ -77,7 +85,7 @@ const typeDefs = gql`
 
     type Mutation {
         createUser(input: createUserInput!): String
-        updateUsername(input: updateUsernameInput!): User
+        updateUser(input: updateUserInput!): User
         deleteUser(id: ID!): String
         
         createArticle(input: createArticleInput!): String

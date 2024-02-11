@@ -100,7 +100,7 @@ const resolvers = {
                     email: args.input.email,
                     password: hashedPassword,
                     nationality: args.input.nationality,
-                    age: args.input.age
+                    name: args.input.name
                 })
 
                 await newUser.save();
@@ -111,20 +111,20 @@ const resolvers = {
 
         },
 
-        updateUsername: async (parent, args) => {
+        updateUser: async (parent, args) => {
             if (args.input.newPassword == "") {
-                const { id, newUsername } = args.input
+                const { id, newUsername, newName } = args.input
                 try {
-                    const updatedUser = await User.findByIdAndUpdate(id, { $set: { username: newUsername } }, { new: true })
+                    const updatedUser = await User.findByIdAndUpdate(id, { $set: { username: newUsername, name: newName } }, { new: true })
                     return updatedUser
                 } catch (error) {
                     Error({ error: 'Server Error', code: '500' })
                 }
             } else {
-                const { id, newUsername, newPassword } = args.input
-                const hashedPassword = await bcrypt.hash(args.input.newPassword, 12)
+                const { id, newUsername, newPassword, newName } = args.input
+                const hashedPassword = await bcrypt.hash(newPassword, 12)
                 try {
-                    const updatedUser = await User.findByIdAndUpdate(id, { $set: { username: newUsername, password: hashedPassword } }, { new: true })
+                    const updatedUser = await User.findByIdAndUpdate(id, { $set: { username: newUsername, password: hashedPassword, name: newName } }, { new: true })
                     return updatedUser
                 } catch (error) {
                     Error({ error: 'Server Error', code: '500' })
