@@ -16,7 +16,6 @@ const resolvers = {
             } catch (error) {
                 Error({ error: 'Server Error', code: '500' })
             }
-
         },
 
         user: async (parent, args) => {
@@ -29,7 +28,23 @@ const resolvers = {
             } catch (error) {
                 Error({ error: 'Server Error', code: '500' })
             }
+        },
+        
+        
+        userArticle: async (parent, args) => {
+            try {
+                let user = await User.findById({ _id: args.id })
+                if (!user) {
+                    Error({ error: 'User not Found', code: '404' })
+                }
+                const articles = await Article.find({}).populate('author')
+                const userArticles = articles.filter(art => art.author._id == args.id)
+                //console.log(userArticles);
+                return userArticles
 
+            } catch (error) {
+                Error({ error: 'Server Error', code: '500' })
+            }
         },
 
 

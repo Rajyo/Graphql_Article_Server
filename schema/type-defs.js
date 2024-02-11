@@ -40,6 +40,8 @@ const typeDefs = gql`
         users: [User!]!
         user(id: ID!): User!
 
+        userArticle(id: ID!): [ArticleAuthor!]!
+
         articles: [ArticleAuthor!]!
         article(id: ID!): Article!
     }
