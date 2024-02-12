@@ -51,14 +51,14 @@ const init = async () => {
     })
 
 
-    app.use('/graphql', cors(), express.json(), expressMiddleware(server, { context: context }))
+    app.use('/graphql', cors({origin: process.env.FRONTEND_URL}), express.json(), expressMiddleware(server, { context: context }))
 
     app.get('/', (req, res) => {
         res.send("Hello World")
     })
 
-    await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve))
-    console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+    await new Promise((resolve) => httpServer.listen({ port: process.env.PORT }, resolve))
+    console.log(`🚀 Server ready at port ${process.env.PORT}`);
 
 }
 init()
