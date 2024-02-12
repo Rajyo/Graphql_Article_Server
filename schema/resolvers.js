@@ -37,7 +37,7 @@ const resolvers = {
                 if (!user) {
                     Error({ error: 'User not Found', code: '404' })
                 }
-                const articles = await Article.find({}).populate('author')
+                const articles = await Article.find({}).populate('author').sort({_id: -1})
                 const userArticles = articles.filter(art => art.author._id == args.id)
                 //console.log(userArticles);
                 return userArticles
@@ -50,7 +50,7 @@ const resolvers = {
 
         articles: async () => {
             try {
-                const articles = await Article.find({}).populate('author')
+                const articles = await Article.find({}).populate('author').sort({_id: -1})
                 return articles
             } catch (error) {
                 Error({ error: 'Server Error', code: '500' })
